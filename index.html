@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="gamestyle.css">
+    <script src="sketchgame.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <h1 class="headerTitle">
+            Robert's Sketch Pad
+        </h1>
+    </div>
+
+    <section class="pad-section">
+        <div class="control-buttons">
+            <div class="background-div">
+                <div class="color">
+                    <input type="color" id="bgColorPalette" class="bgColor" name="bgColorPalette" value = #ffffff>
+                </div>
+                <span>Background Color</span>
+            </div>
+            <div class="pen-color-div">
+                <div class="colorPen">                
+                    <input type="color" id="penColorPalette" class="penColor" name="colorPalette" value=#ffba00>
+                </div>              
+                <span>Pen Color</span>
+            </div>
+            
+            <button class="rainbow-button button">Rainbow Colors</button>
+            <button class="grid-line-button btn-on button">Grid-line</button>
+            <button class="eraser-button button">Eraser</button>
+            <button class="clear-button button">Clear</button>
+            <div class="grid-size-toogle">
+                <input type="range" value="16" min="1" max="64" id="range-slider" step="1">
+                <span id="display-toogle-size">Grid-Size: 16 x 16</span>
+            </div>
+        </div>
+        <div class="grid-container"></div>
+        
+ </section>
+
+
+
+
+    
+</body>
+</html>
