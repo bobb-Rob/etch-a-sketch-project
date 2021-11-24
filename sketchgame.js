@@ -1,7 +1,7 @@
 let container = document.querySelector(".grid-container");
 let rows = document.getElementsByClassName("row");
 let cells = document.getElementsByClassName("cell");
-
+console.log(cells)
 // Buttons
 
 // Background Button
@@ -11,7 +11,7 @@ let bgDropPallete = document.querySelector("#bgColorPalette");
 let penColorDiv = document.querySelector(".colorPen");
 let penColor = document.querySelector("#penColorPalette");
 
-let rainBowBtn = document.querySelector(".rainbow-button");
+let randomColorBtn = document.querySelector(".rainbow-button");
 let showGridLine = document.querySelector(".grid-line-button");
 let eraserBtn = document.querySelector(".eraser-button");
 let clearBtn = document.querySelector(".clear-button");
@@ -67,62 +67,114 @@ bgColorBtn.addEventListener("click", ()=>{
     bgDropPallete.oninput = ()=>{       
         container.style.backgroundColor = bgDropPallete.value;
     } 
-})
+}, true)
 
-// Pen Color event click
-// let painting = false;
+// Random Color button eventlister
+randomColorBtn.addEventListener("click", ()=>{    
+    if(!randomColorBtn.classList.contains("btn-on")){
+        randomColorBtn.classList.add("btn-on");
+        console.log("randomColorBtn 'on'");       
+    }else{
+        randomColorBtn.classList.remove("btn-on");
+        console.log("randomColorBtn 'off'")
+        
+    }  
+})   
 
-penColorDiv.onclick = () => {
-    penColor.oninput = ()=>{  
-        container.onmousedown = (e) =>{
-            e.target.style.backgroundColor = penColor.value;
-        }
-        document.querySelectorAll(".cell").forEach(cell => {
-            cell.onmouseenter = (e) =>{
-                e.target.style.backgroundColor = penColor.value;
-            }
-        });
 
+// pencolor writing both one color and random color
+
+function RandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
     }
-}
+    return color;
+}; 
+
+container.onmouseover = () =>{
+     console.log(!randomColorBtn.classList.contains("btn-on"))
+     let cellArray = Array.from(cells);
+    if(!randomColorBtn.classList.contains("btn-on") && !eraserBtn.classList.contains("btn-on")){
+        console.log(!randomColorBtn.classList.contains("btn-on"));
+        cellArray.forEach(cell => {
+            cell.addEventListener("mouseover", (e)=>{
+            e.stopPropagation();
+            e.target.style.backgroundColor = penColor.value;
+            })
+        });
+    }else if(randomColorBtn.classList.contains("btn-on") && !eraserBtn.classList.contains("btn-on")){
+        console.log('btn-on is added');
+        cellArray.forEach(cell => {
+            cell.addEventListener("mouseover", (e)=>{
+            e.stopPropagation();
+            e.target.style.backgroundColor = RandomColor();
+            })
+        });
+    }else{
+        cellArray.forEach(cell => {
+            cell.addEventListener("mouseover", (e)=>{
+            e.stopPropagation();
+            e.target.style.backgroundColor = "white";
+            })
+        });
+    }
     
+}
+   
+      
 
 // Toogle on/off grid line
 showGridLine.addEventListener("click", ()=>{
     let flexItems = document.querySelectorAll(".cell")
     if(showGridLine.classList.contains("btn-on")){
         showGridLine.classList.remove("btn-on");
+        console.log("grid line is not showing");
        flexItems.forEach(element => {    
         element.classList.add("grid-line");
         });
     } else{
         showGridLine.classList.add("btn-on");
+        console.log("grid line is showing");
         flexItems.forEach(element => {    
         element.classList.remove("grid-line");
         });
     }  
 })
 
+eraserBtn.addEventListener("click", ()=>{
+    if(!eraserBtn.classList.contains("btn-on")){
+        eraserBtn.classList.add("btn-on");       
+    }else{
+        eraserBtn.classList.remove("btn-on")
+    }
+})
+
+
+
+
 // Clear Button
 clearBtn.onclick = () =>{
     if(showGridLine.classList.contains("btn-on")){
     clearGrid();
     makeGrid(gridSizeToogle.value, gridSizeToogle.value)
-    console.log("i am clicked")
+    console.log("Grid cleared while grid-line in 'on'");
     }else{
     clearGrid();
+    console.log("Grid cleared while grid-line in 'off'")
     makeGrid(gridSizeToogle.value, gridSizeToogle.value);
     let flexItems = Array.from(document.querySelectorAll(".cell"));
     flexItems.forEach(element => {    
+        // Adds "grid-line" class which border is styled to none.
         element.classList.add("grid-line");
         });
-    }
-
+    }   
 }
 
 
 
 
 
-console.log(cells)
-console.log(showGridLine)
+// console.log(cells)
+// console.log(showGridLine)

@@ -9,6 +9,7 @@
 *{
     box-sizing: border-box;
 }
+
     
 :root{
     --blue: rgb(13, 13, 39);
@@ -149,12 +150,12 @@ input[type="color"]::-webkit-color-swatch {
 
 
 .cell{   
-    border: 1px solid var(--blue);
+    border: 1px solid white;
    flex: 1 1 auto;
 }
 
 .grid-line{
-   border: none !important;
+   border: 1px solid rgb(63, 62, 62) !important;
 }
 
 .btn-on{
