@@ -132,13 +132,13 @@ showGridLine.addEventListener("click", ()=>{
         showGridLine.classList.remove("btn-on");
         console.log("grid line is not showing");
        flexItems.forEach(element => {    
-        element.classList.add("grid-line");
+        element.classList.remove("grid-line");
         });
     } else{
         showGridLine.classList.add("btn-on");
         console.log("grid line is showing");
         flexItems.forEach(element => {    
-        element.classList.remove("grid-line");
+        element.classList.add("grid-line");
         });
     }  
 })
@@ -156,7 +156,8 @@ eraserBtn.addEventListener("click", ()=>{
 
 // Clear Button
 clearBtn.onclick = () =>{
-    if(showGridLine.classList.contains("btn-on")){
+    // if Grid-line button ellement does not contain class "btn-on", 
+    if(!showGridLine.classList.contains("btn-on")){
     clearGrid();
     makeGrid(gridSizeToogle.value, gridSizeToogle.value)
     console.log("Grid cleared while grid-line in 'on'");
@@ -166,15 +167,9 @@ clearBtn.onclick = () =>{
     makeGrid(gridSizeToogle.value, gridSizeToogle.value);
     let flexItems = Array.from(document.querySelectorAll(".cell"));
     flexItems.forEach(element => {    
-        // Adds "grid-line" class which border is styled to none.
+        // Adds "grid-line" class which displays cell border is styled to light-gray.
         element.classList.add("grid-line");
         });
     }   
 }
 
-
-
-
-
-// console.log(cells)
-// console.log(showGridLine)
